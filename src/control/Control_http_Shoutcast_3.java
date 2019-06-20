@@ -186,10 +186,10 @@ public class Control_http_Shoutcast_3 {
 			//if no genre is defined - its a keyword search
 			if(!genre.trim().equals("") || genre == null) {
 				data += URLEncoder.encode("genrename", "UTF-8") + "=" + URLEncoder.encode(genre, "UTF-8");
-			    url =  new URL("http://www.shoutcast.com/Home/BrowseByGenre");
+			    url =  new URL("https://directory.shoutcast.com/Home/BrowseByGenre");
 			} else {
 				data += URLEncoder.encode("query", "UTF-8") + "=" + URLEncoder.encode(keyword, "UTF-8");
-			    url =  new URL("http://www.shoutcast.com/Search/UpdateSearch");
+			    url =  new URL("https://directory.shoutcast.com/Search/UpdateSearch");
 			}
 			
 		    SRSOutput.getInstance().logD("Shoutcast query for genres: "+url);
