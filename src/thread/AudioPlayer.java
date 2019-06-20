@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 
 import misc.Stream;
 
-import org.gstreamer.*;
-import org.gstreamer.elements.PlayBin2;
-
+import org.freedesktop.gstreamer.*;
+import org.freedesktop.gstreamer.elements.*;
+import org.freedesktop.gstreamer.GstObject;
 import control.SRSOutput;
 
 import gui.Gui_StreamRipStar;
@@ -23,7 +23,7 @@ public class AudioPlayer extends Thread{
 	private ResourceBundle trans = ResourceBundle.getBundle("translations.StreamRipStar");
 	private Stream stream;
 	private Gui_StreamRipStar mainGui;
-	private PlayBin2 playbin;
+	private PlayBin playbin;
 	private SRSOutput lg = SRSOutput.getInstance();
 	
 	/**
@@ -36,9 +36,9 @@ public class AudioPlayer extends Thread{
 		this.stream = stream;
 		this.mainGui = mainGui;
 		try {
-			playbin = new PlayBin2("AudioPlayer");
+			playbin = new PlayBin("AudioPlayer");
 			//set the valume for this new player to avoid a wrong gain at start
-			playbin.setVolumePercent(mainGui.getVolumeManager().getVolume());
+			playbin.setVolume(mainGui.getVolumeManager().getVolume()/100);
 			lg.logD("AudioPlayer: Player created");
 		}
 		//if we get here an exception, we should disable the internal audio player with gstreamer
@@ -133,7 +133,7 @@ public class AudioPlayer extends Thread{
 			});
 
 			lg.logD("AudioPlayer: Loading stream");
-	        playbin.setState(org.gstreamer.State.PLAYING);
+	        playbin.setState(org.freedesktop.gstreamer.State.PLAYING);
 	        lg.logD("AudioPlayer: Start Playing");
 	        Gst.main();
 
@@ -163,10 +163,10 @@ public class AudioPlayer extends Thread{
 			lg.logD("AudioPlayer: Try to stop the audio player with the stream: "+stream.name);
 		}
 		
-		if(playbin != null && playbin.getState(200) != org.gstreamer.State.NULL)
+		if(playbin != null && playbin.getState(200) != org.freedesktop.gstreamer.State.NULL)
 		{
-			while(playbin.getState(200) != org.gstreamer.State.NULL) {
-				playbin.setState(org.gstreamer.State.NULL);
+			while(playbin.getState(200) != org.freedesktop.gstreamer.State.NULL) {
+				playbin.setState(org.freedesktop.gstreamer.State.NULL);
 			}
 			mainGui.showMessageInTray("");
 		}
@@ -181,12 +181,12 @@ public class AudioPlayer extends Thread{
 	 * Set a now volume for the audio player
 	 * @param volumePercent The new volume in percent
 	 */
-	public void setAudioVolum(int volumePercent)
+	public void setAudioVolum(double volumePercent)
 	{
 		if(playbin != null)
 		{
-			lg.logD("AudioPlayer: set new volume to"+volumePercent);
-			playbin.setVolumePercent(volumePercent);
+			lg.logD("AudioPlayer: set new volume to "+volumePercent);
+			playbin.setVolume(volumePercent/100);
 		}
 	}
 }

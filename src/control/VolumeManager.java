@@ -73,7 +73,7 @@ public class VolumeManager
 	 * 
 	 * @return Volume in percent
 	 */
-	public int getVolume()
+	public double getVolume()
 	{
 		if(list.capacity() > 0)
 		{
