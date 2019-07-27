@@ -1,7 +1,7 @@
 [Stable]
-revision=613
-name=StreamRipStar 0.6.9
-download=https://downloads.sourceforge.net/project/stripper/StreamRipStar0.6/0.6.9/StreamRipStar-0.6.9.jar?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fstripper%2F&ts=1414068943&use_mirror=garr
+revision=620
+name=StreamRipStar 0.6.10
+download=https://downloads.sourceforge.net/project/stripper/StreamRipStar0.6/0.6.10/StreamRipStar-0.6.10.jar?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fstripper%2Ffiles%2Flatest%2Fdownload&ts=1564252023
 
 [Beta]
 revision=625
